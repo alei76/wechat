@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export>
+	<template id="fans_export" name="粉丝导出">
+		<column key="OPEN_ID" title="微信号"/>
+		<column key="NICK_NAME" title="昵称"/>
+		<column key="SEX" title="性别"/>
+		<column key="COUNTRY" title="国家"/>
+		<column key="PROVINCE" title="省/市"/>
+		<column key="CITY" title="市/区"/>
+		<column key="LANGUAGE" title="语言"/>
+		<column key="GROUP_NAME" title="所在分组"/>
+	</template>
+</export>

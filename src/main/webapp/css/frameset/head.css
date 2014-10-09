@@ -1,0 +1,95 @@
+.account {
+	float: right;
+	padding-top: 10px;
+	font-size: 0
+}
+
+.account a {
+	color: #222
+}
+
+.account a:hover {
+	color: #459ae9
+}
+
+.account a.account_primary_link {
+	color: #459ae9
+}
+
+.account_meta {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: bottom;
+	font-size: 14px
+}
+
+.account_info {
+	position: relative;
+	margin-right: 8px;
+	min-width: 80px
+}
+
+.account_info .nickname {
+	display: inline-block;
+	font-weight: 400;
+	font-style: normal;
+	margin-top: 18px
+}
+
+.account_logout a {
+	display: inline-block;
+	margin-left: 5px;
+	padding-left: 14px;
+	line-height: 16px;
+	margin-top: 18px;
+	padding-left: 14px;
+	border-left: 1px solid #e7e7eb
+}
+.logo {
+	float: left;
+	padding-top: 10px;
+	font-size: 24px;
+	padding-left: 50px;
+}
+
+.logo a {
+	display: block;
+	width: 140px;
+	height: 40px;
+	overflow: hidden;
+	text-decoration: none;
+	*background: transparent
+		url(../../images/wechat/logo.png) 0 0 no-repeat;
+	*line-height: 120px
+}
+
+.logo a:before {
+	display: inline-block;
+	content: url(../../images/wechat/logo.png)
+}
+
+.head .inner {
+	*zoom: 1;
+	height: 60px
+}
+
+.head .inner:after {
+	content: "\200B";
+	display: block;
+	height: 0;
+	clear: both
+}
+
+.head .inner.wrp {
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.head_box {
+	position: relative;
+	background-color: #fff;
+	border-top: 4px solid #44b549;
+	border-bottom: 1px solid #d9dadc
+}

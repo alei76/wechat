@@ -1,0 +1,224 @@
+.appmsg {
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 20px;
+	border: 1px solid #d3d3d3;
+	background-color: #fff;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.appmsg_content {
+	padding: 0 14px;
+	border-bottom: 1px solid #d3d3d3;
+	position: relative;
+	*zoom: 1;
+}
+
+.appmsg_title {
+	font-weight: 400;
+	font-style: normal;
+	font-size: 16px;
+	padding-top: 6px;
+	line-height: 28px;
+	max-height: 56px;
+	overflow: hidden;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.appmsg_title a {
+	display: block;
+	color: #222;
+}
+
+.appmsg_thumb_wrp {
+	height: 160px;
+	overflow: hidden;
+}
+
+.appmsg_thumb {
+	width: 100%;
+}
+
+.appmsg_desc {
+	padding: 0;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.appmsg_item {
+	*zoom: 1;
+	position: relative;
+	padding: 12px 14px;
+	border-top: 1px solid #d3d3d3;
+}
+
+.appmsg_info {
+	font-size: 16px;
+	padding: 5px;
+}
+
+.appmsg_item:after {
+	content: "\200B";
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.appmsg_item .appmsg_title {
+	line-height: 24px;
+	max-height: 48px;
+	overflow: hidden;
+	*zoom: 1;
+	margin-top: 14px;
+}
+
+.appmsg_item .appmsg_thumb {
+	float: right;
+	width: 78px;
+	height: 78px;
+	margin-left: 14px;
+}
+
+.multi .appmsg_content {
+	padding: 15px 0 0;
+}
+
+.multi .appmsg_title {
+	font-size: 14px;
+	padding-top: 0;
+}
+
+.cover_appmsg_item {
+	position: relative;
+	margin: 0 14px 14px;
+}
+
+.cover_appmsg_item .appmsg_title {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.6) !important;
+	filter: progid : DXImageTransform.Microsoft.gradient (GradientType = 0, startColorstr = '#99000000', endcolorstr = '#99000000' );
+}
+
+.cover_appmsg_item .appmsg_title a {
+	padding: 0 4px;
+	color: #fff;
+}
+
+.tab_content .appmsg {
+	width: 320px;
+}
+
+.create_access {
+	display: block;
+	border: 3px dashed #b8b8b8;
+	line-height: 150px;
+	font-size: 0;
+	text-align: center;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.create_access i {
+	cursor: pointer;
+}
+
+.create_access a {
+	display: none;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: #d9d9d9;
+	font-size: 14px;
+	line-height: normal;
+}
+
+.create_access a strong {
+	display: block;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.create_access:hover .add_gray {
+	display: none;
+}
+
+.create_access:hover a {
+	display: inline-block;
+}
+
+.appmsg_list {
+	text-align: justify;
+	text-justify: distribute-all-lines;
+	text-align-last: justify;
+	font-size: 0;
+	padding-top: 38px;
+	margin: 0 46px;
+	letter-spacing: -4px;
+}
+
+.appmsg_list:after {
+	display: inline-block;
+	width: 100%;
+	height: 0;
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	content: ".";
+}
+
+.appmsg_col {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: top;
+	width: 48%;
+	font-size: 14px;
+	text-align: left;
+	font-size: 14px;
+	letter-spacing: normal;
+}
+
+.icon_appmsg_create {
+	background: url("../../images/media_list.png") 0 0 no-repeat;
+	width: 50px;
+	height: 56px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+a:hover .icon_appmsg_create {
+	background: url("../../images/media_list.png") 0 -66px no-repeat;
+}
+
+.icon_appmsg_create.multi {
+	background: url("../../images/media_list.png") 0 -132px no-repeat;
+}
+
+a:hover .icon_appmsg_create.multi {
+	background: url("../../images/media_list.png") 0 -198px no-repeat;
+}
+
+.icon42_common {
+	width: 42px;
+	height: 42px;
+	vertical-align: middle;
+	display: inline-block;
+	line-height: 100px;
+	overflow: hidden;
+}
+
+.icon42_common.add_gray {
+	background: url("../../images/base_z.png") 0 -2983px no-repeat;
+}

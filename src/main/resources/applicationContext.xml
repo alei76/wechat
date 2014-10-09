@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+	<description>Spring Config</description>
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" lazy-init="false">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+				<value>classpath:weixin_error.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="utf-8" />
+		<property name="ignoreResourceNotFound" value="false" />
+	</bean>
+
+	<!-- enable autowire 
+	<context:annotation-config />
+	-->
+	<aop:aspectj-autoproxy />
+	
+	<context:spring-configured />
+
+	<!-- Enable transaction demarcation with annotations -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- Enable component scanning and autowire -->
+	<context:component-scan base-package="com.covisint.wechat">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	
+	<!-- DataSource 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@10.203.31.2:1521/QA044.SHANGHAIGM.COM" />
+		<property name="username" value="WSWECHT" />
+		<property name="password" value="Asdf1234" />
+	</bean>
+	-->
+	
+	<!-- DataSource -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">  
+        <property name="jndiName" value="java:comp/env/jdbc/wechat"/>  
+    </bean> 
+	
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg index="0" ref="dataSource" />
+	</bean>
+
+	<bean class="com.covisint.wechat.data.SqlSessionDaoSupport">
+		<constructor-arg index="0" ref="jdbcTemplate" />
+	</bean>
+
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="productServiceMethods" expression="execution(* com.covisint.wechat.*.service.*.*(..)) || execution(* com.covisint.wechat.data.dao.*Dao.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="productServiceMethods" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="page*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="info*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- MultipartResolver for parsing file uploads, implementation for Commons FileUpload -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="4096" />
+	</bean>
+
+	<bean class="com.covisint.wechat.spring.SpringContext" />
+	
+	<bean id="objectMapper" class="com.covisint.wechat.jackson.JacksonObjectMapper" />
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="message" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	
+	<bean id="freemarkerConfig" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+		<property name="freemarkerSettings" ref="freemarkerConfiguration" />
+	</bean>
+	
+	<bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">  
+        <property name="location" value="classpath:freemarker.properties" />  
+    </bean>
+    
+    <bean class="com.covisint.wechat.irobot.remoting.AskServiceStub">
+		<constructor-arg index="0" value="${i-robot.webservice}" />
+	</bean>
+
+	<bean id="messageExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 线程池维护线程的最少数量 -->
+		<property name="corePoolSize" value="5" />
+		<!-- 线程池维护线程所允许的空闲时间 -->
+		<property name="keepAliveSeconds" value="30000" />
+		<!-- 线程池维护线程的最大数量 -->
+		<property name="maxPoolSize" value="1000" />
+		<!-- 线程池所使用的缓冲队列 -->
+		<property name="queueCapacity" value="200" />
+	</bean>  
+	
+	<bean id="poiExportParse" class="com.covisint.wechat.poiexport.parse.ExcelExportXmlParse">
+		<constructor-arg index="0" value="poi-template.xml"/>
+	</bean>
+	
+	<bean id="jdbcExcelExportDao" class="com.covisint.wechat.poiexport.support.JdbcExcelExportDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="parse" ref="poiExportParse"/>
+	</bean>
+	
+	
+</beans>

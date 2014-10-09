@@ -1,0 +1,36 @@
+/************************************************************************************
+ * @File name   :      DictService.java
+ *
+ * @Author      :      马恩伟
+ *
+ * @Date        :      2014-4-25
+ *
+ * @Copyright Notice: 
+ * Copyright (c) 2011 SGM, Inc. All  Rights Reserved.
+ * This software is published under the terms of the SGM Software
+ * License version 1.0, a copy of which has been included with this
+ * distribution in the LICENSE.txt file.
+ * 
+ * 
+ * ----------------------------------------------------------------------------------
+ * Date								Who					Version				Comments
+ * 2014-4-25 上午08:55:24			马恩伟			1.0				Initial Version
+ ************************************************************************************/
+package com.covisint.wechat.kernel.service;
+
+import java.util.List;
+
+import com.covisint.wechat.data.model.WxDataDictionary;
+
+/**
+ * 数据字典Service
+ */
+public interface DictService {
+	/**
+	 * 获取数据字典信息
+	 * 
+	 * @Author : 马恩伟
+	 * @Date : 2014-4-25
+	 */
+	public List<WxDataDictionary> listDict(String dictCode);
+}

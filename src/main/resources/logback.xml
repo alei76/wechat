@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_HOME" value="${wechat.root}" />
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="UTF-8">
+			<pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- -->
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/wechat.log</file> 
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>TRACE</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/wechat-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %-5level %logger{80} - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender> 
+	
+	
+	
+	<!-- 
+	<root level="DEBUG">
+		<appender-ref ref="stdout" />
+	</root>
+	-->
+	
+	<!-- -->
+	<root level="debug">
+		<appender-ref ref="rollingFile" />
+	</root>
+	
+	
+	<logger name="com.covisint.wechat" level="info" />
+	<logger name="org.springframework" level="info" />
+	<logger name="org.springframework.web" level="info" />
+	<logger name="org.apache.axis2" level="info" />
+	<logger name="org.apache.axiom" level="info" />
+	<logger name="org.apache.commons" level="info" />
+	<logger name="org.quartz.core" level="info" />
+	<logger name="httpclient.wire" level="info" />
+	<logger name="org.apache.http" level="info" />
+	<logger name="org.apache" level="info" />
+	
+</configuration>
